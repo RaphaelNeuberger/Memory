@@ -1,0 +1,96 @@
+// ============================================================
+// SHARED BUTTONS
+// ============================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  font-family: var(--font-family);
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  // Home play button — fixed yellow, dark text, centered, no rounded corners
+  &--play {
+    background-color: #f0ea6e;
+    color: #303131;
+    font-family: 'Red Rose', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    width: 250px;
+    height: 98px;
+    padding: 20px;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 0;
+  }
+
+  // Settings start button — theme accent
+  &--primary {
+    background-color: var(--accent);
+    color: #2a2b2e;
+  }
+
+  // Transparent with border
+  &--outlined {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--text-primary);
+  }
+
+  // Muted secondary action
+  &--secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  // Back to start — matches theme accent
+  &--home {
+    background-color: var(--card-color);
+    color: #ffffff;
+    margin-top: 16px;
+  }
+
+  &__icon {
+    width: 44px;
+    height: 32px;
+    transition: transform var(--transition-fast);
+  }
+
+  &--play:hover:not(:disabled) {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  &--play:hover &__icon {
+    transform: rotate(-45deg);
+  }
+
+  &__arrow {
+    display: inline-block;
+    transition: text-shadow var(--transition-fast);
+  }
+
+  &--play:hover &__arrow {
+    text-shadow: 0.4px 0 currentColor, -0.4px 0 currentColor;
+  }
+}
