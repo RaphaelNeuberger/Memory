@@ -1,0 +1,14 @@
+// ============================================================
+// BASE TYPOGRAPHY
+// ============================================================
+
+html {
+  font-family: var(--font-family);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color var(--transition-medium), color var(--transition-medium);
+}
