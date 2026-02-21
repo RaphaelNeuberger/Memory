@@ -1,0 +1,37 @@
+// ============================================================
+// THEME CUSTOM PROPERTIES
+// ============================================================
+
+:root {
+  --font-family: 'Almarai', system-ui, sans-serif;
+  --transition-fast: 150ms ease;
+  --transition-medium: 300ms ease-in-out;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --card-flip-duration: 400ms;
+
+  // Global highlight color — used across all themes
+  --color-highlight: #f0ea6e;
+}
+
+// Code Vibes — dark, teal cards, yellow-green accent
+[data-theme="codevibes"] {
+  --bg:             #2a2b2e;
+  --bg-secondary:   #3a3b3e;
+  --card-color:     #4ecdc4;
+  --card-front-bg:  #ffffff;
+  --text-primary:   #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent:         #cef542;
+}
+
+// Foods — light/cream, orange cards
+[data-theme="foods"] {
+  --bg:             #f5f0e8;
+  --bg-secondary:   #ede6d6;
+  --card-color:     #f0a040;
+  --card-front-bg:  #ffffff;
+  --text-primary:   #303131;
+  --text-secondary: #666666;
+  --accent:         #f0a040;
+}

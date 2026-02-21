@@ -1,0 +1,77 @@
+// ============================================================
+// MINI PREVIEW BOARD (settings page component)
+// ============================================================
+
+.preview {
+  &__board {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.08);
+    font-size: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__score {
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+
+    &--blue   { background-color: #3b82f6; color: #fff; }
+    &--orange { background-color: #f97316; color: #fff; }
+  }
+
+  &__current {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: auto;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &--blue   { background-color: #3b82f6; }
+    &--orange { background-color: #f97316; }
+  }
+
+  &__exit-btn {
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 16px;
+    background-color: var(--bg, #2a2b2e);
+  }
+
+  .preview--foods &__grid {
+    background-color: #f5f0e8;
+  }
+
+  &__card {
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    background-color: var(--card-color, #4ecdc4);
+    transition: background-color var(--transition-medium);
+  }
+}

@@ -27,7 +27,7 @@
 
   // Home play button — fixed yellow, dark text, centered, no rounded corners
   &--play {
-    background-color: #f0ea6e;
+    background-color: var(--color-highlight);
     color: #303131;
     font-family: 'Red Rose', serif;
     font-size: 40px;
@@ -46,8 +46,9 @@
 
   // Settings start button — theme accent
   &--primary {
-    background-color: var(--accent);
-    color: #2a2b2e;
+    background-color: var(--color-highlight);
+    color: #303131;
+    border-radius: 0;
   }
 
   // Transparent with border
@@ -87,10 +88,11 @@
 
   &__arrow {
     display: inline-block;
-    transition: text-shadow var(--transition-fast);
+    transition: transform var(--transition-fast), text-shadow var(--transition-fast);
   }
 
   &--play:hover &__arrow {
+    transform: scale(1.4);
     text-shadow: 0.4px 0 currentColor, -0.4px 0 currentColor;
   }
 }

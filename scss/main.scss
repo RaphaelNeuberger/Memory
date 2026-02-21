@@ -1,0 +1,24 @@
+// ============================================================
+// ENTRY POINT — imports all partials in dependency order
+// ============================================================
+
+// Abstract: variables, mixins, functions (no CSS output except variables)
+@use 'abstract/variables';
+@use 'abstract/mixin';
+@use 'abstract/function';
+
+// Base: fonts, reset, typography
+@use 'base/fonts';
+@use 'base/reset';
+@use 'base/typography';
+
+// Components: reusable UI pieces
+@use 'components/button';
+@use 'components/card';
+@use 'components/main' as preview-component;
+
+// Pages: full-page sections
+@use 'pages/home';
+@use 'pages/settings';
+@use 'pages/game';
+@use 'pages/game-over';

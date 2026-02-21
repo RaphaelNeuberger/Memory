@@ -1,0 +1,58 @@
+// ============================================================
+// HOME PAGE
+// ============================================================
+
+.home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: clamp(32px, 8vw, 64px);
+  overflow: hidden;
+  background-color: #303131;
+
+  &__hero {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+  }
+
+  &__tagline {
+    font-family: 'Almarai', sans-serif;
+    font-weight: 400;
+    font-size: clamp(20px, 6vw, 48px);
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  &__heading {
+    font-family: 'Red Rose', serif;
+    font-size: clamp(40px, 10.5vw, 140px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: clamp(24px, 5vw, 48px);
+  }
+
+  // Large faded controller icon in the bottom-left corner
+  &__decoration {
+    position: fixed;
+    bottom: -60px;
+    left: -60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__bg-icon {
+    width: clamp(200px, 40vw, 560px);
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
