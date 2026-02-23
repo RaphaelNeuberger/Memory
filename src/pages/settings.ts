@@ -52,7 +52,7 @@ function renderPlayerGroup(): string {
   return `
     <section class="settings__group" aria-labelledby="label-player">
       <h2 id="label-player" class="settings__group-title">
-        <span class="settings__group-icon" aria-hidden="true"><img src="/assets/img/settings/chess_pawn.svg" alt="Palette" style="width: 1.2em; height: 1.2em; vertical-align: middle;" /></span>
+        <span class="settings__group-icon" aria-hidden="true"><img src="/assets/img/settings/chess_pawn.svg" alt="Chess pawn" style="width: 1.2em; height: 1.2em; vertical-align: middle;" /></span>
         Choose player
       </h2>
       <label class="settings__option">
@@ -75,7 +75,7 @@ function renderBoardSizeGroup(): string {
   return `
     <section class="settings__group" aria-labelledby="label-size">
       <h2 id="label-size" class="settings__group-title">
-        <span class="settings__group-icon" aria-hidden="true"><img src="/assets/img/settings/style.svg" alt="Palette" style="width: 1.2em; height: 1.2em; vertical-align: middle;" /></span>
+        <span class="settings__group-icon" aria-hidden="true"><img src="/assets/img/settings/style.svg" alt="Board size icon" style="width: 1.2em; height: 1.2em; vertical-align: middle;" /></span>
         Board size
       </h2>
       <label class="settings__option">
@@ -119,6 +119,41 @@ function renderPreview(theme: Theme | null): string {
 }
 
 /**
+ * Renders a crumb with its trailing separator, wrapped in a breadcrumb-item span.
+ * @param label - display text
+ * @param active - whether this crumb is selected
+ * @returns HTML string
+ */
+function renderSeparatedCrumb(label: string, active: boolean): string {
+  const sepImg = active ? "line_high_active_" : "line_high_deactive_";
+  const activeCls = active ? "settings__crumb--active" : "";
+  return `
+    <span class="settings__breadcrumb-item">
+      <span class="settings__crumb ${activeCls}">${label}</span>
+      <span class="settings__breadcrumb-sep"><img src="/assets/img/settings/${sepImg}.svg" alt="" aria-hidden="true" /></span>
+    </span>
+  `;
+}
+
+/**
+ * Renders the Start button in the correct enabled/disabled state.
+ * @param complete - whether all settings are selected
+ * @returns HTML string
+ */
+function renderStartButton(complete: boolean): string {
+  const disabled = complete ? "" : "disabled";
+  const icon = complete
+    ? "/assets/img/settings/smart_display.svg"
+    : "/assets/img/settings/smart_display_disable.svg";
+  return `
+    <button class="btn btn--primary settings__start-btn" id="btn-start" ${disabled}>
+      <img src="${icon}" alt="" aria-hidden="true" class="settings__start-icon" />
+      Start
+    </button>
+  `;
+}
+
+/**
  * Renders the breadcrumb bar at the bottom with current selections.
  * @param s - current settings snapshot
  * @returns HTML string
@@ -127,23 +162,57 @@ function renderBreadcrumb(s: Settings): string {
   const themeLabel = s.theme ? THEME_LABELS[s.theme] : "Game theme";
   const playerLabel = s.player ? PLAYER_LABELS[s.player] : "Player";
   const sizeLabel = s.boardSize ? SIZE_LABELS[s.boardSize] : "Board size";
-  const complete = isSettingsComplete(s);
-  const disabled = complete ? "" : "disabled";
-  const icon = complete
-    ? "/assets/img/settings/smart_display.svg"
-    : "/assets/img/settings/smart_display_disable.svg";
+  const sizeActiveCls = s.boardSize ? "settings__crumb--active" : "";
   return `
     <footer class="settings__breadcrumb" id="settings-breadcrumb">
-      <span class="settings__crumb ${s.theme ? "settings__crumb--active" : ""}">${themeLabel}</span>
-      <span class="settings__breadcrumb-sep"><img src="/assets/img/settings/${s.theme ? "line_high_active_" : "line_high_deactive_"}.svg" alt="" aria-hidden="true" /></span>
-      <span class="settings__crumb ${s.player ? "settings__crumb--active" : ""}">${playerLabel}</span>
-      <span class="settings__breadcrumb-sep"><img src="/assets/img/settings/${s.player ? "line_high_active_" : "line_high_deactive_"}.svg" alt="" aria-hidden="true" /></span>
-      <span class="settings__crumb ${s.boardSize ? "settings__crumb--active" : ""}">${sizeLabel}</span>
-      <button class="btn btn--primary settings__start-btn" id="btn-start" ${disabled}>
-        <img src="${icon}" alt="" aria-hidden="true" class="settings__start-icon" />
-        Start
-      </button>
+      ${renderSeparatedCrumb(themeLabel, !!s.theme)}
+      ${renderSeparatedCrumb(playerLabel, !!s.player)}
+      <span class="settings__crumb ${sizeActiveCls}">${sizeLabel}</span>
+      ${renderStartButton(isSettingsComplete(s))}
     </footer>
+  `;
+}
+
+/**
+ * Renders the settings page header section.
+ * @returns HTML string
+ */
+function renderSettingsHeader(): string {
+  return `
+    <header class="settings__header">
+      <h1 class="settings__title">
+        Settings
+        <img src="/assets/img/settings/line_h1.svg" alt="" aria-hidden="true" class="settings__title-line" />
+      </h1>
+    </header>
+  `;
+}
+
+/**
+ * Renders the left-column controls (theme, player, board size).
+ * @returns HTML string
+ */
+function renderControlsColumn(): string {
+  return `
+    <div class="settings__controls">
+      ${renderThemeGroup()}
+      ${renderPlayerGroup()}
+      ${renderBoardSizeGroup()}
+    </div>
+  `;
+}
+
+/**
+ * Renders the right-column preview and breadcrumb.
+ * @param s - current settings
+ * @returns HTML string
+ */
+function renderRightColumn(s: Settings): string {
+  return `
+    <div class="settings__right">
+      ${renderPreview(s.theme)}
+      ${renderBreadcrumb(s)}
+    </div>
   `;
 }
 
@@ -155,22 +224,10 @@ export function renderSettings(): string {
   const s = getSettings();
   return `
     <main class="settings" data-page="settings">
-      <header class="settings__header">
-        <h1 class="settings__title">
-          Settings
-          <img src="/assets/img/settings/line_h1.svg" alt="" aria-hidden="true" class="settings__title-line" />
-        </h1>
-      </header>
+      ${renderSettingsHeader()}
       <div class="settings__body">
-        <div class="settings__controls">
-          ${renderThemeGroup()}
-          ${renderPlayerGroup()}
-          ${renderBoardSizeGroup()}
-        </div>
-        <div class="settings__right">
-          ${renderPreview(s.theme)}
-          ${renderBreadcrumb(s)}
-        </div>
+        ${renderControlsColumn()}
+        ${renderRightColumn(s)}
       </div>
     </main>
   `;
@@ -226,27 +283,48 @@ function syncRightColumnHeight(): void {
 }
 
 /**
- * Attaches all radio change listeners and the Start button listener.
+ * Attaches change listeners for all theme radio inputs.
  */
-export function initSettingsEvents(): void {
+function attachThemeListeners(): void {
   document.querySelectorAll<HTMLInputElement>("input[name='theme']").forEach((el) => {
     el.addEventListener("change", () => {
       updateSettings({ theme: el.value as Theme });
       refreshSettingsUI();
     });
   });
+}
+
+/**
+ * Attaches change listeners for all player radio inputs.
+ */
+function attachPlayerListeners(): void {
   document.querySelectorAll<HTMLInputElement>("input[name='player']").forEach((el) => {
     el.addEventListener("change", () => {
       updateSettings({ player: el.value as PlayerColor });
       refreshSettingsUI();
     });
   });
+}
+
+/**
+ * Attaches change listeners for all board size radio inputs.
+ */
+function attachSizeListeners(): void {
   document.querySelectorAll<HTMLInputElement>("input[name='boardSize']").forEach((el) => {
     el.addEventListener("change", () => {
       updateSettings({ boardSize: parseInt(el.value) as BoardSize });
       refreshSettingsUI();
     });
   });
+}
+
+/**
+ * Attaches all radio change listeners and the Start button listener.
+ */
+export function initSettingsEvents(): void {
+  attachThemeListeners();
+  attachPlayerListeners();
+  attachSizeListeners();
   reattachStartListener();
   syncRightColumnHeight();
 }

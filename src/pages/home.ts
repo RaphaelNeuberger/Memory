@@ -1,44 +1,13 @@
 import { navigateTo } from "../main";
 
 /**
- * Renders the large faded controller icon in the background.
- * @returns HTML string for the decorative icon
- */
-function renderDecorationIcon(): string {
-  return `
-    <img
-      src="/assets/img/home/stadia_controller.svg"
-      alt=""
-      class="home__bg-icon"
-      aria-hidden="true"
-    />
-  `;
-}
-
-/**
- * Renders the hero heading block.
- * @returns HTML string for tagline and main heading
- */
-function renderHeroText(): string {
-  return `
-    <p class="home__tagline">It's play time.</p>
-    <h1 class="home__heading">Ready to play?</h1>
-  `;
-}
-
-/**
- * Renders the Play CTA button with controller icon.
- * @returns HTML string for the play button
+ * Renders the play button with controller icon.
+ * @returns HTML string
  */
 function renderPlayButton(): string {
   return `
     <button class="btn btn--play" id="btn-play">
-      <img
-        src="/assets/img/home/stadia_controller_icon.svg"
-        alt=""
-        aria-hidden="true"
-        class="btn__icon"
-      />
+      <img src="/assets/img/home/stadia_controller_icon.svg" alt="" aria-hidden="true" class="btn__icon" />
       Play <span class="btn__arrow">&rarr;</span>
     </button>
   `;
@@ -52,11 +21,12 @@ export function renderHome(): string {
   return `
     <main class="home" data-page="home">
       <section class="home__hero">
-        ${renderHeroText()}
+        <p class="home__tagline">It's play time.</p>
+        <h1 class="home__heading">Ready to play?</h1>
         ${renderPlayButton()}
       </section>
       <aside class="home__decoration" aria-hidden="true">
-        ${renderDecorationIcon()}
+        <img src="/assets/img/home/stadia_controller.svg" alt="" class="home__bg-icon" aria-hidden="true" />
       </aside>
     </main>
   `;

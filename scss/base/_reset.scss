@@ -1,0 +1,17 @@
+// ============================================================
+// CSS RESET
+// ============================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// SPA layout: body fills the viewport and never scrolls
+body {
+  height: 100vh;
+  overflow: hidden;
+}

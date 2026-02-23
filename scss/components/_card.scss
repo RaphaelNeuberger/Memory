@@ -1,0 +1,87 @@
+// ============================================================
+// GAME BOARD & CARD FLIP ANIMATION
+// ============================================================
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 4), 1fr);
+  grid-template-rows: repeat(var(--grid-rows, 4), 1fr);
+  gap: 8px;
+  padding: 8px;
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  perspective: 1000px;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform var(--card-flip-duration) ease-in-out;
+  }
+
+  &__face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Face-down side: SVG image fills the card
+    &--front {
+      img {
+        width: 100%;
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+    }
+
+    // Face-up side: image only, background limited to image size
+    &--back {
+      transform: rotateY(180deg);
+      background-color: #E8F3F0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+    }
+  }
+
+  // Triggered when is-flipped class is added
+  &.is-flipped .card__inner {
+    transform: rotateY(180deg);
+  }
+
+  // Matched cards stay flipped and are slightly faded
+  &.is-matched {
+    pointer-events: none;
+
+    .card__face--back {
+      box-shadow: 0 0 0 3px var(--card-color);
+      opacity: 0.75;
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-card);
+  }
+}

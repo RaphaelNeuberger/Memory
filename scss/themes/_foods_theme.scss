@@ -1,0 +1,210 @@
+
+@use 'sass:list';
+
+// FOODS THEME — visual overrides (scoped to [data-theme="foods"])
+// Structural/layout styles live in scss/layout/_game.scss
+
+$foods-confetti-colors:        (#f0a040, #e74c3c, #fbbf24, #22c55e, #f472b6);
+$foods-winner-confetti-colors: (#f0a040, #e74c3c, #fbbf24, #22c55e, #f472b6, #fb923c, #a78bfa);
+
+[data-theme="foods"] {
+
+  // exit dialog
+  .exit-dialog {
+    background-color: #F6F6F6;
+    border-radius: 20px;
+    p {
+      font-family: 'Klee One', sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 28px;
+      line-height: 40px;
+      color: #A45212;
+    }
+  }
+
+  // game header
+  .score__label {
+    display: none;
+  }
+
+  .game-header {
+    background-color: #F0E5D9;
+    border-radius: 10px;
+
+    &__scores {
+      background-color: #ffffff;
+      border-radius: 10px;
+    }
+
+    .score {
+      font-family: 'Delius Unicase', sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+    }
+
+    &__current {
+      font-family: 'Klee One', sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      color: #A45212;
+
+      img {
+        border-radius: 8px;
+        padding: 4px;
+      }
+
+      &[data-player="blue"] img {
+        background-color: #097FC5;
+      }
+
+      &[data-player="orange"] img {
+        background-color: #EA6900;
+      }
+    }
+
+    &__exit {
+      #btn-exit {
+        color: #F3832D;
+        background-color: #FFF9F2;
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        font-family: 'Delius Unicase', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+
+        img {
+          width: 24px;
+          height: 24px;
+          object-fit: contain;
+          flex-shrink: 0;
+        }
+
+        &:hover {
+          background-color: #F3832D;
+          border-color: #F3832D;
+          color: #ffffff;
+          box-shadow: none;
+          transform: none;
+          opacity: 1;
+
+          img {
+            content: url('/assets/img/foods_theme/game/exit_white.svg');
+          }
+        }
+      }
+    }
+  }
+
+  // game page background
+  .game {
+    background-color: #ffffff;
+  }
+
+  // game over screen
+  .game-over {
+    background-color: #F3832D;
+
+    .game-header__scores {
+      border-radius: 0;
+    }
+
+    &__title {
+      font-family: 'Klee One', sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 130px;
+      color: #fff;
+      text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    }
+
+    &__winner-label {
+      font-family: 'Klee One', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 40px;
+      color: #A45212;
+    }
+    &__score-label {
+      color: var(--text-primary);
+    }
+  }
+
+  // game winner screen
+  .game-winner {
+      &__winner,
+      &__winner--orange {
+        font-family: 'Klee One', sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 80px;
+        color: #A45212;
+      }
+    &__title {
+      color: var(--accent);
+      text-shadow: -7px 0px 8px rgba(240, 160, 64, 0.5);
+    }
+
+    &__winner-label {
+      font-family: 'Klee One', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 40px;
+      color: #A45212;
+    }
+    &__score-label {
+      color: var(--text-primary);
+    }
+  }
+
+  // buttons
+  .btn.btn--home {
+    background-color: #F3832D;
+    color: #fff;
+    border: 2px solid #F3832D;
+    border-radius: 10px;
+    font-family: 'Delius Unicase', sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 12px 20px;
+  }
+
+  .btn.btn--dialog-back {
+    background-color: #FFAB3E;
+    border: 3px solid #F3832D;
+    border-radius: 10px;
+    font-family: 'Delius Unicase', sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    font-size: 16px;
+  }
+
+  .btn.btn--dialog-exit {
+    background-color: #FFF9F2;
+    border: 3px solid #F3832D;
+    font-family: 'Delius Unicase', sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    font-size: 16px;
+    color: #F3832D;
+    border-radius: 10px;
+  }
+
+  // confetti — game over (5 pieces, warm food colors)
+  @for $i from 0 through 4 {
+    .confetti--#{$i} {
+      background-color: list.nth($foods-confetti-colors, $i + 1);
+    }
+  }
+
+  // confetti — game winner (20 pieces, warm food colors)
+  @for $i from 5 through 19 {
+    .confetti--#{$i} {
+      background-color: list.nth($foods-winner-confetti-colors, ($i % 7) + 1);
+    }
+  }
+}

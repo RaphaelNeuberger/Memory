@@ -1,6 +1,14 @@
+@use 'sass:math';
+
 // ============================================================
 // FUNCTIONS
 // ============================================================
 
-// Placeholder — add shared SCSS functions here as needed
-// Example: @function rem($px) { @return #{$px / 16}rem; }
+/// Converts a pixel value to rem, based on a 16px root font size.
+/// @param {Number} $px - Value in pixels (unitless or px)
+/// @return {Number} Value in rem
+/// @example scss
+///   font-size: rem(24); // → 1.5rem
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}

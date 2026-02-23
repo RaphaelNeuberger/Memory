@@ -64,11 +64,41 @@
     color: var(--text-primary);
   }
 
-  // Back to start — matches theme accent
+  // Back to start — outlined teal
   &--home {
-    background-color: var(--card-color);
+    background-color: rgba(134, 233, 214, 0.14);
+    border: 2px solid #4DD5BC;
     color: #ffffff;
+    font-family: 'Red Rose', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    border-radius: 0;
     margin-top: 16px;
+    width: 240px;
+    justify-content: center;
+  }
+
+  // Exit dialog: back button — solid teal fill
+  &--dialog-back {
+    background-color: #66CFBC;
+    color: #ffffff;
+    font-family: 'Red Rose', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: 0;
+    border-radius: 0;
+  }
+
+  // Exit dialog: exit button — outlined teal
+  &--dialog-exit {
+    background-color: rgba(134, 233, 214, 0.14);
+    border: 2px solid #4DD5BC;
+    color: #4DD5BC;
+    font-family: 'Red Rose', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 0;
   }
 
   &__icon {

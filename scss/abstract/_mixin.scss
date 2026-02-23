@@ -2,5 +2,16 @@
 // MIXINS
 // ============================================================
 
-// Placeholder — add shared mixins here as needed
-// Example: @mixin flex-center { display: flex; align-items: center; justify-content: center; }
+/// Centers content with flexbox on both axes.
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Stacks children vertically, centered on the cross-axis.
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -20,5 +20,10 @@
 // Pages: full-page sections
 @use 'pages/home';
 @use 'pages/settings';
-@use 'pages/game';
-@use 'pages/game-over';
+
+// Layout: shared game screen structure (both themes)
+@use 'layout/game';
+
+// Themes: visual overrides per theme
+@use 'themes/code_vibes_theme';
+@use 'themes/foods_theme';

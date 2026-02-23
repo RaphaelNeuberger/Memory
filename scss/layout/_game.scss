@@ -1,0 +1,305 @@
+@use 'sass:list';
+
+// GAME — shared layout
+// Structural styles for .game, .game-header, .score,
+// .exit-dialog, .game-over, .game-winner and confetti.
+// Visual (color, font-family) overrides live in scss/themes/
+
+
+// game page
+.game {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+// game header
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  padding: clamp(8px, 2vh, 20px) clamp(12px, 3vw, 48px);
+  gap: clamp(8px, 1.5vw, 16px);
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__scores {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 26px;
+
+    @media (max-width: 400px) { font-size: 1rem; gap: 6px; }
+  }
+
+  &__exit {
+    position: relative;
+  }
+}
+
+
+// score chip
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(4px, 0.8vh, 6px) clamp(8px, 1.5vw, 14px);
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+
+// exit confirmation dialog
+.exit-dialog {
+  border: none;
+  padding: 36px;
+  max-width: 560px;
+  width: 90vw;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media (max-width: 400px) { padding: 24px 20px; border-radius: 12px; }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  p {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: 0;
+    text-align: center;
+    margin-bottom: 28px;
+
+    @media (max-width: 400px) { font-size: 0.95rem; margin-bottom: 20px; }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: nowrap;
+
+    @media (max-width: 360px) { flex-wrap: wrap; }
+  }
+}
+
+
+// game over screen
+.game-over {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 48px;
+  overflow: hidden;
+  background-color: var(--bg);
+
+  @media (max-width: 640px) { padding: 32px 24px; }
+  @media (max-width: 400px) { padding: 24px 16px; }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__winner-label {
+    font-size: 26px;
+    margin-top: 12px;
+  }
+
+  &__winner {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    @media (max-width: 400px) { font-size: 1.4rem; }
+  }
+
+  &__scores {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__score-label {
+    font-size: 26px;
+  }
+
+  &__score-row {
+    display: flex;
+    gap: 12px;
+
+    @media (max-width: 400px) { gap: 8px; }
+  }
+}
+
+
+// confetti — container + keyframes
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(-12px) rotate(0deg);   opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes confetti-fall-winner {
+  0%   { transform: translateY(-14px) rotate(0deg);   opacity: 1; }
+  75%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+}
+
+// confetti pieces — game over (5 pieces, position + animation only)
+@for $i from 0 through 4 {
+  .confetti--#{$i} {
+    position: absolute;
+    top: -12px;
+    left: #{$i * 20 + 5 + "%"};
+    width: 10px;
+    height: 12px;
+    border-radius: 2px;
+    animation: confetti-fall #{2.5 + $i * 0.4}s ease-in #{$i * 0.3}s infinite;
+    transform: rotate(#{$i * 45}deg);
+  }
+}
+
+// confetti pieces — game winner (20 base classes, position + animation only)
+$confetti-left:   (2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97);
+$confetti-dur:    (1.6, 2.1, 1.8, 2.4, 1.5, 2.8, 2.0, 1.7, 2.3, 1.9, 2.6, 1.5, 2.2, 1.8, 2.5, 1.6, 2.0, 2.7, 1.7, 2.3);
+$confetti-delay:  (0.0, 0.4, 0.8, 0.2, 1.0, 0.6, 0.1, 0.9, 0.3, 0.7, 0.5, 1.2, 0.0, 1.4, 0.3, 0.8, 1.1, 0.5, 0.2, 0.9);
+$confetti-rot:    (0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 15, 45, 75, 105, 135, 165, 195, 225);
+$confetti-size-w: (8, 12, 10, 14, 8, 10, 12, 9, 13, 8, 11, 10, 14, 9, 12, 8, 10, 13, 11, 9);
+$confetti-size-h: (10, 14, 12, 10, 14, 8, 10, 14, 8, 12, 13, 10, 8, 14, 10, 12, 14, 9, 12, 11);
+
+@for $i from 0 through 19 {
+  .confetti--#{$i} {
+    position: absolute;
+    top: -14px;
+    left: #{list.nth($confetti-left, $i + 1) + "%"};
+    width: #{list.nth($confetti-size-w, $i + 1) + "px"};
+    height: #{list.nth($confetti-size-h, $i + 1) + "px"};
+    border-radius: 2px;
+    transform: rotate(#{list.nth($confetti-rot, $i + 1)}deg);
+    animation: confetti-fall-winner #{list.nth($confetti-dur, $i + 1)}s ease-in #{list.nth($confetti-delay, $i + 1)}s infinite;
+  }
+}
+
+
+// game winner screen
+.game-winner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 48px;
+  overflow: hidden;
+  background-color: var(--bg);
+
+  @media (max-width: 640px) { padding: 32px 24px; }
+  @media (max-width: 400px) { padding: 24px 16px; }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__winner-label {
+    font-size: 40px;
+    margin-top: 12px;
+  }
+
+  &__winner {
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    @media (max-width: 400px) { font-size: 1.4rem; }
+  }
+
+  &__pawn {
+    width: 240px;
+    height: auto;
+    display: block;
+    margin-top: 8px;
+  }
+
+  &__scores {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__score-label {
+    font-size: 26px;
+  }
+
+  &__score-row {
+    display: flex;
+    gap: 12px;
+
+    @media (max-width: 400px) { gap: 8px; }
+  }
+}

@@ -1,0 +1,128 @@
+@use 'sass:list';
+
+// CODE VIBES THEME — visual overrides only
+// Structural/layout styles live in scss/layout/_game.scss
+
+[data-theme="codevibes"] {
+
+  // game header
+  .game-header {
+    &__scores {
+      background-color: rgba(134, 233, 214, 0.2);
+    }
+
+    &__current {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    &__exit {
+      #btn-exit {
+        font-family: 'Red Rose', sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        color: #ffffff;
+        background-color: rgba(134, 233, 214, 0.2);
+        border: 1px solid #4DD5BC;
+        border-radius: 0;
+
+        &:hover {
+          background-color: rgba(134, 233, 214, 0.26);
+          box-shadow: 0 0 0 2px #4DD5BC;
+        }
+      }
+    }
+  }
+
+  // score chip
+  .score {
+    font-family: 'Red Rose', sans-serif;
+
+    &--blue   { color: #2BB1FF; }
+    &--orange { color: #F58E39; }
+  }
+
+  // exit dialog
+  .exit-dialog {
+    background-color: #ffffff;
+    color: #303131;
+
+    p {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 700;
+    }
+  }
+
+  // game over screen
+  .game-over {
+    &__title {
+      font-family: 'Red Rose', sans-serif;
+      color: #4DD5BC;
+      text-shadow: -7px 0px 8px rgba(77, 213, 188, 0.5);
+    }
+
+    &__winner-label {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    &__winner {
+      &--blue   { color: #3b82f6; }
+      &--orange { color: #f97316; }
+    }
+
+    &__score-label {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+    }
+  }
+
+  // game winner screen
+  .game-winner {
+    &__title {
+      font-family: 'Red Rose', sans-serif;
+      color: #4DD5BC;
+      text-shadow: -7px 0px 8px rgba(77, 213, 188, 0.5);
+    }
+
+    &__winner-label {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    &__winner {
+      font-family: 'Red Rose', sans-serif;
+
+      &--blue   { color: #3b82f6; }
+      &--orange { color: #f97316; }
+    }
+
+    &__score-label {
+      font-family: 'Red Rose', sans-serif;
+      font-weight: 400;
+      color: #ffffff;
+    }
+  }
+
+  // confetti colors — game over (5 pieces)
+  $cv-confetti-colors: (#cef542, #4ecdc4, #f97316, #3b82f6, #e74c3c);
+
+  @for $i from 0 through 4 {
+    .confetti--#{$i} {
+      background-color: list.nth($cv-confetti-colors, $i + 1);
+    }
+  }
+
+  // confetti colors — game winner (20 base classes)
+  $cv-winner-confetti-colors: (#cef542, #4ecdc4, #f97316, #3b82f6, #e74c3c, #f0ea6e, #a855f7);
+
+  @for $i from 0 through 19 {
+    .confetti--#{$i} {
+      background-color: list.nth($cv-winner-confetti-colors, ($i % 7) + 1);
+    }
+  }
+}
