@@ -71,12 +71,12 @@ export function renderGameWinner(): string {
 }
 
 /**
- * Attaches the Home button listener to reset state and return to start.
+ * Attaches the Home button listener to reset state and navigate to settings.
  */
 export function initGameWinnerEvents(): void {
   document.getElementById("btn-home")?.addEventListener("click", () => {
     clearGameState();
     resetSettings();
-    navigateTo("home");
+    navigateTo("settings");
   });
 }

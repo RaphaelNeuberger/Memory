@@ -180,4 +180,4 @@
         <button class="btn btn--home" id="btn-home">${t.theme==="foods"?"HOME":"Back to start"}</button>
       </section>
     </main>
-  `}function qe(){document.getElementById("btn-home")?.addEventListener("click",()=>{x(),G(),o("home")})}function De(e){return e==="home"?T():e==="settings"?we():e==="game"?ee():e==="game-over"?Ge():e==="game-winner"?Re():""}function Ne(e){e==="home"&&F(),e==="settings"&&Ae(),e==="game"&&ge(),e==="game-over"&&ke(),e==="game-winner"&&qe()}function o(e){z(e);const t=document.getElementById("app");t&&(t.innerHTML=De(e),Ne(e))}function We(){o(O())}We();
+  `}function qe(){document.getElementById("btn-home")?.addEventListener("click",()=>{x(),G(),o("settings")})}function De(e){return e==="home"?T():e==="settings"?we():e==="game"?ee():e==="game-over"?Ge():e==="game-winner"?Re():""}function Ne(e){e==="home"&&F(),e==="settings"&&Ae(),e==="game"&&ge(),e==="game-over"&&ke(),e==="game-winner"&&qe()}function o(e){z(e);const t=document.getElementById("app");t&&(t.innerHTML=De(e),Ne(e))}function We(){o(O())}We();

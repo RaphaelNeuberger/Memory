@@ -39,9 +39,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 26px;
+    font-size: clamp(16px, 2.5vw, 26px);
 
-    @media (max-width: 400px) { font-size: 1rem; gap: 6px; }
+    @media (max-width: 400px) { gap: 6px; }
   }
 
   &__exit {
@@ -58,7 +58,7 @@
   padding: clamp(4px, 0.8vh, 6px) clamp(8px, 1.5vw, 14px);
   border-radius: 20px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(16px, 2.2vw, 24px);
 }
 
 
@@ -84,13 +84,13 @@
   }
 
   p {
-    font-size: 32px;
-    line-height: 40px;
+    font-size: clamp(16px, 3vw, 32px);
+    line-height: 1.3;
     letter-spacing: 0;
     text-align: center;
     margin-bottom: 28px;
 
-    @media (max-width: 400px) { font-size: 0.95rem; margin-bottom: 20px; }
+    @media (max-width: 400px) { margin-bottom: 20px; }
   }
 
   &__actions {
@@ -137,7 +137,7 @@
   }
 
   &__winner-label {
-    font-size: 26px;
+    font-size: clamp(16px, 2.5vw, 26px);
     margin-top: 12px;
   }
 
@@ -159,7 +159,7 @@
   }
 
   &__score-label {
-    font-size: 26px;
+    font-size: clamp(16px, 2.5vw, 26px);
   }
 
   &__score-row {
@@ -264,12 +264,12 @@ $confetti-size-h: (10, 14, 12, 10, 14, 8, 10, 14, 8, 12, 13, 10, 8, 14, 10, 12, 
   }
 
   &__winner-label {
-    font-size: 40px;
+    font-size: clamp(16px, 4vw, 40px);
     margin-top: 12px;
   }
 
   &__winner {
-    font-size: 60px;
+    font-size: clamp(16px, 6vw, 60px);
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -278,7 +278,7 @@ $confetti-size-h: (10, 14, 12, 10, 14, 8, 10, 14, 8, 12, 13, 10, 8, 14, 10, 12, 
   }
 
   &__pawn {
-    width: 240px;
+    width: clamp(120px, 25vw, 240px);
     height: auto;
     display: block;
     margin-top: 8px;
@@ -293,7 +293,7 @@ $confetti-size-h: (10, 14, 12, 10, 14, 8, 10, 14, 8, 12, 13, 10, 8, 14, 10, 12, 
   }
 
   &__score-label {
-    font-size: 26px;
+    font-size: clamp(16px, 2.5vw, 26px);
   }
 
   &__score-row {
